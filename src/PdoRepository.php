@@ -17,11 +17,18 @@ abstract class PdoRepository
     ) {
     }
 
-    protected function fetch(string $id): PDOStatement
+    protected function fetch(string $id): object|false
     {
-        return $this->where('id = :id', [
+        $statement = $this->where('id = :id', [
             ':id' => $id,
         ]);
+
+        return $statement->fetchObject($this->entityName);
+    }
+
+    protected function fetchAll(): array|false
+    {
+        return $this->where()->fetchAll(PDO::FETCH_CLASS, $this->entityName);
     }
 
     protected function where(string $where = '', array $parameters = []): PDOStatement
