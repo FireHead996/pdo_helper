@@ -6,7 +6,7 @@ namespace FireHead996\PdoHelper;
 
 use ReflectionClass;
 
-class PDOParams
+class PdoParams
 {
     private string $className;
     private ReflectionClass $ref;

@@ -7,7 +7,7 @@ namespace FireHead996\PdoHelper;
 use PDO;
 use PDOStatement;
 
-abstract class PDORepository
+abstract class PdoRepository
 {
     protected string $entityName = 'Entity';
     protected string $table = 'Entities';
@@ -59,7 +59,7 @@ abstract class PDORepository
 
     protected function insertOrUpdate(object $entity): void
     {
-        $params = new PDOParams($entity);
+        $params = new PdoParams($entity);
 
         $exists = $this->exists('id = :id', $params->getBindableParameter('id'));
 
@@ -86,7 +86,7 @@ abstract class PDORepository
         }
     }
 
-    protected function insert(PDOParams $params): void
+    protected function insert(PdoParams $params): void
     {
         $table = $this->table;
         $schema = implode(', ', $params->getKeys());
@@ -101,7 +101,7 @@ abstract class PDORepository
         $stmt->execute();
     }
 
-    protected function update(PDOParams $params): void
+    protected function update(PdoParams $params): void
     {
         $table = $this->table;
         $values = $params->getAllFieldsToUpdate();

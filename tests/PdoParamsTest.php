@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace FireHead996\PdoHelper\Tests;
 
-use FireHead996\PdoHelper\PDOParams;
+use FireHead996\PdoHelper\PdoParams;
 use PHPUnit\Framework\TestCase;
 
-class PDOParamsTest extends TestCase
+class PdoParamsTest extends TestCase
 {
     public function testCanBeCreatedFromValidObject(): void
     {
@@ -25,7 +25,7 @@ class PDOParamsTest extends TestCase
         ];
 
         // Act
-        $params = new PDOParams($testClass);
+        $params = new PdoParams($testClass);
 
         // Assert
         $this->assertSame($params->getAllBindableParameters(), $expected);
