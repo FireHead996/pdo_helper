@@ -6,6 +6,7 @@ namespace FireHead996\PdoHelper;
 
 use PDO;
 use PDOStatement;
+use Ramsey\Uuid\Uuid;
 
 abstract class PdoRepository
 {
@@ -67,6 +68,11 @@ abstract class PdoRepository
     protected function insertOrUpdate(object $entity): void
     {
         $params = new PdoParams($entity);
+
+        if (!isset($params->getBindableParameter('id')[':id'])) {
+            $entity->id = Uuid::uuid4();
+            $params = new PdoParams($entity);
+        }
 
         $exists = $this->exists('id = :id', $params->getBindableParameter('id'));
 
